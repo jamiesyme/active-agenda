@@ -5,7 +5,25 @@
 	<key>CFBundleDevelopmentRegion</key>
 	<string>English</string>
 	<key>CFBundleDocumentTypes</key>
-	<array></array>
+	<array>
+		<dict>
+			<key>CFBundleTypeExtensions</key>
+			<array>
+				<string>db</string>
+				<string>sqlite</string>
+			</array>
+			<key>CFBundleTypeIconFile</key>
+			<string>firefox.icns</string>
+			<key>CFBundleTypeMIMETypes</key>
+			<array>
+				<string>application/x-sqlite3</string>
+			</array>
+			<key>CFBundleTypeName</key>
+			<string>SQLite Database</string>
+			<key>CFBundleTypeRole</key>
+			<string>Viewer</string>
+		</dict>
+	</array>
 	<key>LSEnvironment</key>
 	<dict>
 		<key>XUL_APP_FILE</key>
