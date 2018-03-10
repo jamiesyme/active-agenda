@@ -63,9 +63,9 @@ fi
 
 log "Patching version"
 
-echo "MOZ_APP_VERSION='$SW_VERSION'" >> "$FF_SOURCE_DIR/browser/branding/active-agenda/configure.sh"
-echo "$SW_VERSION" > "$FF_SOURCE_DIR/browser/config/version.txt"
-echo "$SW_VERSION" > "$FF_SOURCE_DIR/browser/config/version_display.txt"
+echo "MOZ_APP_VERSION='$AA_VERSION'" >> "$FF_SOURCE_DIR/browser/branding/active-agenda/configure.sh"
+echo "$AA_VERSION" > "$FF_SOURCE_DIR/browser/config/version.txt"
+echo "$AA_VERSION" > "$FF_SOURCE_DIR/browser/config/version_display.txt"
 
 
 log "Patching installer"

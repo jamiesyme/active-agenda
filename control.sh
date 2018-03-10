@@ -5,7 +5,7 @@ set -euo pipefail
 
 SIGNING_IDENTITY_A='3rd Party Mac Developer Application: Adrien Gilmore (7BUQJW3EMM)'
 SIGNING_IDENTITY_I='3rd Party Mac Developer Installer: Adrien Gilmore (7BUQJW3EMM)'
-SW_VERSION=1.3.10
+AA_VERSION=3.0.0
 
 REPO_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_SCRIPTS_DIR="$REPO_DIR/scripts"

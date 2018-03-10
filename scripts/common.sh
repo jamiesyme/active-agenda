@@ -28,7 +28,7 @@ set -euo pipefail
 #                           sign installers on macOS (default: -)
 #   SIGNING_PASSWORD       Password for unlocking the keychain to allow code
 #                           signing. Only used on macOS (no default).
-#   SW_VERSION             Active Agenda version (default: 0.0.0)
+#   AA_VERSION             Active Agenda version (default: 0.0.0)
 #   SM_SOURCE_DIR          (default: $REPO_DIR/sqlite-manager)
 #
 # Functions:
@@ -55,7 +55,7 @@ export SIGNING_ENTITLEMENTS="${SIGNING_ENTITLEMENTS:-$REPO_CONFIG_DIR/entitlemen
 export SIGNING_IDENTITY_A="${SIGNING_IDENTITY_A:--}"
 export SIGNING_IDENTITY_I="${SIGNING_IDENTITY_I:--}"
 export SIGNING_PASSWORD="${SIGNING_PASSWORD:-}"
-export SW_VERSION="${SW_VERSION:-0.0.0}"
+export AA_VERSION="${AA_VERSION:-0.0.0}"
 export SM_SOURCE_DIR="${SM_SOURCE_DIR:-$REPO_DIR/sqlite-manager}"
 
 log () {
