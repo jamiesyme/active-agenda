@@ -455,7 +455,7 @@ Section "-Application" APP_IDX
   ; since this will either add it for the user if unelevated or All Users if
   ; elevated.
   ${If} $AddStartMenuSC == 1
-    CreateShortCut "$SMPROGRAMS\${BrandFullName}.lnk" "$INSTDIR\${FileMainEXE}" "--app $\"$INSTDIR\apps\sqlite-manager\application.ini$\""
+    CreateShortCut "$SMPROGRAMS\${BrandFullName}.lnk" "$INSTDIR\${FileMainEXE}" "--app $\"$INSTDIR\apps\active-agenda\application.ini$\""
     ${If} ${FileExists} "$SMPROGRAMS\${BrandFullName}.lnk"
       ShellLink::SetShortCutWorkingDirectory "$SMPROGRAMS\${BrandFullName}.lnk" \
                                            "$INSTDIR"
@@ -477,7 +477,7 @@ Section "-Application" APP_IDX
   ${EndIf}
 
   ; Create a shortcut within the installation directory for user convenience.
-  CreateShortCut "$INSTDIR\${BrandFullName}.lnk" "$INSTDIR\${FileMainEXE}" "--app $\"$INSTDIR\apps\sqlite-manager\application.ini$\""
+  CreateShortCut "$INSTDIR\${BrandFullName}.lnk" "$INSTDIR\${FileMainEXE}" "--app $\"$INSTDIR\apps\active-agenda\application.ini$\""
   ${If} ${FileExists} "$INSTDIR\${BrandFullName}.lnk"
     ShellLink::SetShortCutWorkingDirectory "$INSTDIR\${BrandFullName}.lnk" "$INSTDIR"
     ${If} ${AtLeastWin7}
@@ -490,7 +490,7 @@ Section "-Application" APP_IDX
   ${EndIf}
 
   ${If} $AddDesktopSC == 1
-    CreateShortCut "$DESKTOP\${BrandFullName}.lnk" "$INSTDIR\${FileMainEXE}" "--app $\"$INSTDIR\apps\sqlite-manager\application.ini$\""
+    CreateShortCut "$DESKTOP\${BrandFullName}.lnk" "$INSTDIR\${FileMainEXE}" "--app $\"$INSTDIR\apps\active-agenda\application.ini$\""
     ${If} ${FileExists} "$DESKTOP\${BrandFullName}.lnk"
       ShellLink::SetShortCutWorkingDirectory "$DESKTOP\${BrandFullName}.lnk" \
                                              "$INSTDIR"
@@ -670,7 +670,7 @@ FunctionEnd
 # Helper Functions
 
 Function AddQuickLaunchShortcut
-  CreateShortCut "$QUICKLAUNCH\${BrandFullName}.lnk" "$INSTDIR\${FileMainEXE}" "--app $\"$INSTDIR\apps\sqlite-manager\application.ini$\""
+  CreateShortCut "$QUICKLAUNCH\${BrandFullName}.lnk" "$INSTDIR\${FileMainEXE}" "--app $\"$INSTDIR\apps\active-agenda\application.ini$\""
   ${If} ${FileExists} "$QUICKLAUNCH\${BrandFullName}.lnk"
     ShellLink::SetShortCutWorkingDirectory "$QUICKLAUNCH\${BrandFullName}.lnk" \
                                            "$INSTDIR"

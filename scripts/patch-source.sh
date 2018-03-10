@@ -85,14 +85,15 @@ sedi '/@BINPATH@\/@MOZ_APP_NAME@-bin/d'              "$package_manifest"
 
 # Patch the duplicate file error caused by including the sqlite-manager
 # extension in the installer.
+# DISABLED
 
-allowed_dupes="$FF_SOURCE_DIR/browser/installer/allowed-dupes.mn"
-echo 'apps/sqlite-manager/chrome/skin/default/images/close.gif'     >> "$allowed_dupes"
-echo 'chrome/toolkit/skin/classic/global/icons/Close.gif'           >> "$allowed_dupes"
-echo 'apps/sqlite-manager/chrome/icons/default/default16.png'       >> "$allowed_dupes"
-echo 'apps/sqlite-manager/chrome/skin/default/images/default16.png' >> "$allowed_dupes"
-echo 'apps/sqlite-manager/chrome/icons/default/default32.png'       >> "$allowed_dupes"
-echo 'apps/sqlite-manager/chrome/skin/default/images/default32.png' >> "$allowed_dupes"
+#allowed_dupes="$FF_SOURCE_DIR/browser/installer/allowed-dupes.mn"
+#echo 'apps/sqlite-manager/chrome/skin/default/images/close.gif'     >> "$allowed_dupes"
+#echo 'chrome/toolkit/skin/classic/global/icons/Close.gif'           >> "$allowed_dupes"
+#echo 'apps/sqlite-manager/chrome/icons/default/default16.png'       >> "$allowed_dupes"
+#echo 'apps/sqlite-manager/chrome/skin/default/images/default16.png' >> "$allowed_dupes"
+#echo 'apps/sqlite-manager/chrome/icons/default/default32.png'       >> "$allowed_dupes"
+#echo 'apps/sqlite-manager/chrome/skin/default/images/default32.png' >> "$allowed_dupes"
 
 if [[ "$BUILD_OS" = "mac" ]] ; then
 	# Replace Info.plist.in with our patched version, which includes:

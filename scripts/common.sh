@@ -3,6 +3,8 @@ set -euo pipefail
 
 # Variables:
 #   REPO_DIR               Absolute path to root of repo.
+#   AA_SOURCE_DIR          (default: $REPO_DIR/active-agenda)
+#   AA_VERSION             Active Agenda version (default: 0.0.0)
 #   BUILD_OS               OS to build for (note that manually overriding this
 #                           will not affect the Mozilla build system, and is
 #                           untested; this variable is meant to provide
@@ -28,8 +30,6 @@ set -euo pipefail
 #                           sign installers on macOS (default: -)
 #   SIGNING_PASSWORD       Password for unlocking the keychain to allow code
 #                           signing. Only used on macOS (no default).
-#   AA_VERSION             Active Agenda version (default: 0.0.0)
-#   SM_SOURCE_DIR          (default: $REPO_DIR/sqlite-manager)
 #
 # Functions:
 #   log          Logs a message to the console
@@ -41,6 +41,8 @@ set -euo pipefail
 
 export REPO_DIR="${REPO_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 
+export AA_SOURCE_DIR="${AA_SOURCE_DIR:-$REPO_DIR/active-agenda}"
+export AA_VERSION="${AA_VERSION:-0.0.0}"
 export BUILD_OS="${BUILD_OS:-`$REPO_SCRIPTS_DIR/detect-os.sh`}"
 export FF_SOURCE_DIR="${FF_SOURCE_DIR:-$REPO_DIR/build/source}"
 export FF_DIST_DIR="${FF_DIST_DIR:-$FF_SOURCE_DIR/obj-active-agenda/dist}"
@@ -55,8 +57,6 @@ export SIGNING_ENTITLEMENTS="${SIGNING_ENTITLEMENTS:-$REPO_CONFIG_DIR/entitlemen
 export SIGNING_IDENTITY_A="${SIGNING_IDENTITY_A:--}"
 export SIGNING_IDENTITY_I="${SIGNING_IDENTITY_I:--}"
 export SIGNING_PASSWORD="${SIGNING_PASSWORD:-}"
-export AA_VERSION="${AA_VERSION:-0.0.0}"
-export SM_SOURCE_DIR="${SM_SOURCE_DIR:-$REPO_DIR/sqlite-manager}"
 
 log () {
 	echo "$(basename $0): $1"

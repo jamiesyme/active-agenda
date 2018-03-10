@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-APP_DIR="$ROOT_DIR/apps/sqlite-manager"
+APP_DIR="$ROOT_DIR/apps/active-agenda"
 
 # Update the .desktop file icon
 ICON_PATH="$APP_DIR/icons/mozicon128.png"

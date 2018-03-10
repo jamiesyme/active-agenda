@@ -9,7 +9,7 @@
 	<key>LSEnvironment</key>
 	<dict>
 		<key>XUL_APP_FILE</key>
-		<string>/Applications/ActiveAgenda.app/Contents/Resources/apps/sqlite-manager/application.ini</string>
+		<string>/Applications/ActiveAgenda.app/Contents/Resources/apps/active-agenda/application.ini</string>
 	</dict>
 	<key>CFBundleExecutable</key>
 	<string>active-agenda-bin</string>

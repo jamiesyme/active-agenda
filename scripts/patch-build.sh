@@ -37,13 +37,14 @@ log "Installing SQLite Manager"
 
 # Copy patched source.
 
-sm_cp_dir="$ff_dist_res_dir/apps/sqlite-manager"
-mkdir -p "$sm_cp_dir"
-cp -R "$SM_SOURCE_DIR/"* "$sm_cp_dir"
+aa_cp_dir="$ff_dist_res_dir/apps/active-agenda"
+mkdir -p "$aa_cp_dir"
+cp -R "$AA_SOURCE_DIR/"* "$aa_cp_dir"
 
 # Patch version.
+# DISABLED
 
-sedi "s/extVersion: \"x\.x\.x\"/extVersion: \"$AA_VERSION\"/" "$sm_cp_dir/chrome/resource/appInfo.js"
+#sedi "s/extVersion: \"x\.x\.x\"/extVersion: \"$AA_VERSION\"/" "$sm_cp_dir/chrome/resource/appInfo.js"
 
 
 # Install launcher (if necessary).
