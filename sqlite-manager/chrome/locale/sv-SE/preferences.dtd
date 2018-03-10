@@ -1,4 +1,4 @@
-<!ENTITY prefwinTitle "Inställningar för SQLite Composer">
+<!ENTITY prefwinTitle "Inställningar för SQLite Writer">
 <!ENTITY paneMain.title "Allmänt">
 <!ENTITY pref-openMode.label "Starta SQLite-hanteraren">
 <!ENTITY pref-openMode-win "i ett nytt fönster">

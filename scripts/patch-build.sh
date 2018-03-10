@@ -5,8 +5,8 @@ REPO_SCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 . "$REPO_SCRIPTS_DIR/common.sh"
 
 if [[ "$BUILD_OS" = "mac" ]] ; then
-	ff_dist_bin_dir="$FF_DIST_DIR/SQLiteComposer.app/Contents/MacOS"
-	ff_dist_res_dir="$FF_DIST_DIR/SQLiteComposer.app/Contents/Resources"
+	ff_dist_bin_dir="$FF_DIST_DIR/SQLiteWriter.app/Contents/MacOS"
+	ff_dist_res_dir="$FF_DIST_DIR/SQLiteWriter.app/Contents/Resources"
 else
 	ff_dist_bin_dir="$FF_DIST_DIR/bin"
 	ff_dist_res_dir="$FF_DIST_DIR/bin"
@@ -16,13 +16,13 @@ fi
 log "Configuring preferences"
 
 mkdir -p "$ff_dist_res_dir/defaults/pref"
-cp "$REPO_CONFIG_DIR/sqlite-composer.js" "$ff_dist_res_dir/defaults/pref"
+cp "$REPO_CONFIG_DIR/sqlite-writer.js" "$ff_dist_res_dir/defaults/pref"
 cp "$REPO_CONFIG_DIR/mozilla.cfg" "$ff_dist_res_dir"
 
 
 log "Removing extra binary"
 
-rm -f "$ff_dist_bin_dir/sqlite-composer-bin-bin"
+rm -f "$ff_dist_bin_dir/sqlite-writer-bin-bin"
 
 
 log "Installing SQLite Manager"
@@ -43,16 +43,13 @@ cp -R "$SM_SOURCE_DIR/"* "$sm_cp_dir"
 
 # Patch version.
 
-sedi "s/extVersion: \"x\.x\.x\"/extVersion: \"$SC_VERSION\"/" "$sm_cp_dir/chrome/resource/appInfo.js"
+sedi "s/extVersion: \"x\.x\.x\"/extVersion: \"$SW_VERSION\"/" "$sm_cp_dir/chrome/resource/appInfo.js"
 
 
-log "Installing launcher"
+# Install launcher (if necessary).
 
 if [[ "$BUILD_OS" = "linux" ]] ; then
-	cp "$REPO_CONFIG_DIR/linux-launcher.sh" "$ff_dist_bin_dir/sqlite-composer"
-	cp "$REPO_CONFIG_DIR/linux-launcher.desktop" "$ff_dist_bin_dir/sqlite-composer.desktop"
-fi
-
-if [[ "$BUILD_OS" = "mac" ]] ; then
-	cp "$REPO_CONFIG_DIR/mac-launcher.sh" "$ff_dist_bin_dir/sqlite-composer"
+	log "Installing launcher"
+	cp "$REPO_CONFIG_DIR/linux-launcher.sh" "$ff_dist_bin_dir/sqlite-writer"
+	cp "$REPO_CONFIG_DIR/linux-launcher.desktop" "$ff_dist_bin_dir/sqlite-writer.desktop"
 fi

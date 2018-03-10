@@ -20,7 +20,7 @@ const Cu = Components.utils;
 
 const promptService  = Cc["@mozilla.org/embedcomp/prompt-service;1"].getService(Ci.nsIPromptService);
 
-//promptService.alert(null, "SQLite Composer Alert", sMsg);
+//promptService.alert(null, "SQLite Writer Alert", sMsg);
 
 var stmtCallback = {
   handleResult: function(aResultSet) {
@@ -1085,7 +1085,7 @@ SQLiteHandler.prototype = {
   },
 
   alert: function(sMsg) {
-    this.promptService.alert(null, "SQLite Composer Alert", sMsg);
+    this.promptService.alert(null, "SQLite Writer Alert", sMsg);
   },
 
   logMessage: function(sMsg) {

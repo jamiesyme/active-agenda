@@ -1,13 +1,13 @@
-<!ENTITY prefwinTitle "SQLite Composer — Настройки">
+<!ENTITY prefwinTitle "SQLite Writer — Настройки">
 <!ENTITY paneMain.title "Основные">
-<!ENTITY pref-openMode.label "Запускать SQLite Composer">
+<!ENTITY pref-openMode.label "Запускать SQLite Writer">
 <!ENTITY pref-openMode-win "в новом окне">
 <!ENTITY pref-openMode-win.ak "к">
 <!ENTITY pref-openMode-tab "в новой вкладке">
 <!ENTITY pref-openADS.label "Открыть ADS (Windows/только NTFS)">
 <!ENTITY disable "Отключить">
 <!ENTITY enable "Включить">
-<!ENTITY whenSMStarts "При запуске SQLite Composer">
+<!ENTITY whenSMStarts "При запуске SQLite Writer">
 <!ENTITY pref-openWithLastDb.label "Открывать последнюю использовавшуюся базу данных">
 <!ENTITY pref-openWithLastDb.ak "т">
 <!ENTITY pref-promptForLastDb.label "Всегда запрашивать подтверждение при открытии последней использовавшейся базы данных">

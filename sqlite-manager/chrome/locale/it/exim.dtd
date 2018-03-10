@@ -17,7 +17,7 @@
 <!ENTITY sql.transaction "BEGIN TRANSACTION/COMMIT statements should be used">
 <!ENTITY sql.transaction.desc "If this option is checked, it is assumed that, in the selected file, the first and last statements are BEGIN TRANSACTION and COMMIT respectively. The extension will exclude these and execute all the remaining statements in a single transaction. If there are transaction related statements in between too these should be manually removed from the file before importing.">
 <!ENTITY xml.type "Include/Use Type as an attribute">
-<!ENTITY xml.type.desc "Uncheck this option if you are importing data which does not contain this attribute. It is recommended to use this feature if you intend to export data using SQLite Composer. The extra information can then be used during import to distinguish strings, nulls, integers, etc. from each other.">
+<!ENTITY xml.type.desc "Uncheck this option if you are importing data which does not contain this attribute. It is recommended to use this feature if you intend to export data using SQLite Writer. The extra information can then be used during import to distinguish strings, nulls, integers, etc. from each other.">
 <!ENTITY importWizard "Import Wizard">
 <!ENTITY eximDbName "Database:">
 <!ENTITY eximDbName.ak "D">

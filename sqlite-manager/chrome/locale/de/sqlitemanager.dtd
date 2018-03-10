@@ -1,4 +1,4 @@
-<!ENTITY window.title "SQLite Composer">
+<!ENTITY window.title "SQLite Writer">
 <!ENTITY menu.tools "Extras">
 <!ENTITY menu.tools.ak "x">
 <!ENTITY sqliteVersion "SQLite-Version">
@@ -116,7 +116,7 @@
 <!ENTITY menu.help.sqlitesyntax.ak "S">
 <!ENTITY menu.help.extensionhome "Homepage der Erweiterung">
 <!ENTITY menu.help.extensionhome.ak "E">
-<!ENTITY menu.help.aboutextension "Über SQLite Composer">
+<!ENTITY menu.help.aboutextension "Über SQLite Writer">
 <!ENTITY menu.help.aboutextension.ak "b">
 <!ENTITY profile.dblist.select "(Profildatenbank wählen)">
 <!ENTITY profile.dblist.buttonlabel "Los">

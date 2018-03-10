@@ -1,4 +1,4 @@
-<!ENTITY window.title     "SQLite Composer">
+<!ENTITY window.title     "SQLite Writer">
 
 <!ENTITY menu.tools			"Tools">
 <!ENTITY menu.tools.ak "o">
@@ -129,7 +129,7 @@
 <!ENTITY menu.help.sqlitesyntax.ak "S">
 <!ENTITY menu.help.extensionhome			"Extension Homepage">
 <!ENTITY menu.help.extensionhome.ak "E">
-<!ENTITY menu.help.aboutextension			"About SQLite Composer">
+<!ENTITY menu.help.aboutextension			"About SQLite Writer">
 <!ENTITY menu.help.aboutextension.ak "A">
 
 <!ENTITY profile.dblist.select			"(Select Profile Database)">

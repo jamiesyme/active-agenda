@@ -1,13 +1,13 @@
 <!ENTITY prefwinTitle "Opciones SQLiteManager">
 <!ENTITY paneMain.title "Principal">
-<!ENTITY pref-openMode.label "Iniciar SQLite Composer">
+<!ENTITY pref-openMode.label "Iniciar SQLite Writer">
 <!ENTITY pref-openMode-win "en una ventana nueva">
 <!ENTITY pref-openMode-win.ak "w">
 <!ENTITY pref-openMode-tab "en una pestaña nueva">
 <!ENTITY pref-openADS.label "Abrir ADS (Sólo Windows/NTFS)">
 <!ENTITY disable "Deshabilitar">
 <!ENTITY enable "Habilitar">
-<!ENTITY whenSMStarts "Al iniciar SQLite Composer">
+<!ENTITY whenSMStarts "Al iniciar SQLite Writer">
 <!ENTITY pref-openWithLastDb.label "Abrir la última base de datos utilizada">
 <!ENTITY pref-openWithLastDb.ak "O">
 <!ENTITY pref-promptForLastDb.label "Siempre confirmar al abrir la última base de datos utilizada">

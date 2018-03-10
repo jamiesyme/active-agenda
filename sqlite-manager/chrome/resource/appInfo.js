@@ -5,7 +5,7 @@ const Ci = Components.interfaces;
 const Cr = Components.results;
 const Cu = Components.utils;
 
-var extId = "sqlite-composer@teracet.com";
+var extId = "sqlite-writer@teracet.com";
 
 var SmAppInfo = {
   appInfo: Cc["@mozilla.org/xre/app-info;1"].getService(Ci.nsIXULAppInfo),
@@ -13,7 +13,7 @@ var SmAppInfo = {
   extCreator: "Teracet Systems",
 
   webpages: {
-    home: "http://www.teracet.com/sqlite-composer",
+    home: "http://www.teracet.com/sqlite-writer",
     sqliteHome: "http://www.sqlite.org/",
     sqliteLang: "http://www.sqlite.org/lang.html",
     mpl: "http://www.mozilla.org/MPL/MPL-1.1.html"

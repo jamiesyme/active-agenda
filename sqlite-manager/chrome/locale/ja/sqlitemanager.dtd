@@ -1,4 +1,4 @@
-<!ENTITY window.title "SQLite Composer">
+<!ENTITY window.title "SQLite Writer">
 <!ENTITY menu.tools "ツール">
 <!ENTITY menu.tools.ak "o">
 <!ENTITY sqliteVersion "SQLite バージョン">
@@ -116,7 +116,7 @@
 <!ENTITY menu.help.sqlitesyntax.ak "S">
 <!ENTITY menu.help.extensionhome "拡張機能ホームページ">
 <!ENTITY menu.help.extensionhome.ak "E">
-<!ENTITY menu.help.aboutextension "SQLite Composer について">
+<!ENTITY menu.help.aboutextension "SQLite Writer について">
 <!ENTITY menu.help.aboutextension.ak "A">
 <!ENTITY profile.dblist.select "(Select Profile Database)">
 <!ENTITY profile.dblist.buttonlabel "移動">

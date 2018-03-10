@@ -116,7 +116,7 @@
 <!ENTITY menu.help.sqlitesyntax.ak "н">
 <!ENTITY menu.help.extensionhome "Домашняя страница расширения">
 <!ENTITY menu.help.extensionhome.ak "м">
-<!ENTITY menu.help.aboutextension "О SQLite Composer">
+<!ENTITY menu.help.aboutextension "О SQLite Writer">
 <!ENTITY menu.help.aboutextension.ak "S">
 <!ENTITY profile.dblist.select "(Выберите профиль базы данных)">
 <!ENTITY profile.dblist.buttonlabel "Открыть">

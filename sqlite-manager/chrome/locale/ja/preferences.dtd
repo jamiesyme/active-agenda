@@ -1,13 +1,13 @@
 <!ENTITY prefwinTitle "SQLiteManager オプション">
 <!ENTITY paneMain.title "メイン">
-<!ENTITY pref-openMode.label "SQLite Composer の開始">
+<!ENTITY pref-openMode.label "SQLite Writer の開始">
 <!ENTITY pref-openMode-win "新しいウィンドウ">
 <!ENTITY pref-openMode-win.ak "w">
 <!ENTITY pref-openMode-tab "新しいタブ">
 <!ENTITY pref-openADS.label "Open ADS (Windows/NTFS only)">
 <!ENTITY disable "無効">
 <!ENTITY enable "有効">
-<!ENTITY whenSMStarts "SQLite Composer 開始時">
+<!ENTITY whenSMStarts "SQLite Writer 開始時">
 <!ENTITY pref-openWithLastDb.label "最後に利用したデータベースを開く">
 <!ENTITY pref-openWithLastDb.ak "O">
 <!ENTITY pref-promptForLastDb.label "最後に利用したデータベースを開く場合は常に確認する">
