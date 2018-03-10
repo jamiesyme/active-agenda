@@ -117,39 +117,6 @@ if [[ "$BUILD_OS" = "windows" ]] ; then
 fi
 
 
-log "Patching 'Disabled Updater' bug"
-
-if [[ "$BUILD_OS" = "mac" ]] ; then
-	# When building Firefox 54.0.1 with the updater disabled on a Mac, the
-	# build fails. This bug has been patched in later versions, and the fix
-	# can be found here:
-	# https://github.com/mozilla/gecko-dev/commit/5d98501bcf467c85def443ec6ad9c8b73a940cc3
-
-	# The sed commands look funky because the sed that is bundled with Mac
-	# is old, and "\n" is not supported within the replace string.
-
-	guard_open='ifdef MOZ_UPDATER'
-	guard_close='endif'
-
-	sed -i '' "/mv -f/i\\
-	  $guard_open\\
-	  " "$FF_SOURCE_DIR/browser/app/Makefile.in"
-	sed -i '' "/ln -s/a\\
-	  $guard_close\\
-	  " "$FF_SOURCE_DIR/browser/app/Makefile.in"
-
-	guard_open='#ifdef MOZ_UPDATER'
-	guard_close='#endif'
-
-	sed -i '' "/LaunchServices/i\\
-	  $guard_open\\
-	  " "$FF_SOURCE_DIR/browser/installer/package-manifest.in"
-	sed -i '' "/LaunchServices/a\\
-	  $guard_close\\
-	  " "$FF_SOURCE_DIR/browser/installer/package-manifest.in"
-fi
-
-
 log "Patching build flags"
 
 cp "$REPO_CONFIG_DIR/mozconfig" "$FF_SOURCE_DIR/mozconfig"
@@ -197,10 +164,5 @@ if [[ "$BUILD_OS" = "mac" ]] ; then
 	# Disable NSTextInputReplacementRangeAttributeName
 	line='^\(.*NSTextInputReplacementRangeAttributeName.*\)$'
 	file="$FF_SOURCE_DIR/widget/cocoa/TextInputHandler.mm"
-	sedi "s/$line/\/\/\1/" "$file"
-
-	# Disable malloc_logger
-	line='^\(.* malloc_logger.*\)$' # preceding space is intentional
-	file="$FF_SOURCE_DIR/mozglue/misc/StackWalk.cpp"
 	sedi "s/$line/\/\/\1/" "$file"
 fi

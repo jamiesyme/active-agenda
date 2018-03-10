@@ -20,6 +20,7 @@ Tools:
 - curl or wget
 - python2
 - rust
+- clang 5.0
 
 ### Mac
 

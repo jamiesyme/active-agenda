@@ -12,6 +12,8 @@ set -euo pipefail
 #   FF_DIST_DIR            Absolute path to directory where Firefox build will
 #                           be (default: $FF_SOURCE_DIR/obj-sqlite-writer/dist)
 #   FF_VERSION             Firefox version (default: 54.0.1)
+#   LLVM_CONFIG            Absolute path to llvm-config-* executable
+#                           (default: /usr/bin/llvm-config-5.0).
 #   REPO_BUILD_DIR         (default: $REPO_DIR/build)
 #   REPO_CONFIG_DIR        (default: $REPO_DIR/config)
 #   REPO_ICON_DIR          (default: $REPO_DIR/icons)
@@ -42,7 +44,8 @@ export REPO_DIR="${REPO_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 export BUILD_OS="${BUILD_OS:-`$REPO_SCRIPTS_DIR/detect-os.sh`}"
 export FF_SOURCE_DIR="${FF_SOURCE_DIR:-$REPO_DIR/build/source}"
 export FF_DIST_DIR="${FF_DIST_DIR:-$FF_SOURCE_DIR/obj-sqlite-writer/dist}"
-export FF_VERSION="${FF_VERSION:-54.0.1}"
+export FF_VERSION="${FF_VERSION:-58.0.2}"
+export LLVM_CONFIG="${LLVM_CONFIG:-/usr/bin/llvm-config-5.0}"
 export REPO_BUILD_DIR="${REPO_BUILD_DIR:-$REPO_DIR/build}"
 export REPO_CONFIG_DIR="${REPO_CONFIG_DIR:-$REPO_DIR/config}"
 export REPO_ICON_DIR="${REPO_ICON_DIR:-$REPO_DIR/icons}"
