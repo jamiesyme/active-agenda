@@ -21,35 +21,35 @@ log "Patching branding"
 
 # We will use the unofficial Firefox branding as a base.
 
-ff_branding_dir="$FF_SOURCE_DIR/browser/branding/sqlite-writer"
+ff_branding_dir="$FF_SOURCE_DIR/browser/branding/active-agenda"
 cp -r "$FF_SOURCE_DIR/browser/branding/unofficial" "$ff_branding_dir"
 
 # Update any references to "Firefox" or "Mozilla", and overwrite branding
 # images. Note that some windows installer files (.nsi) are patched in this
 # section.
 
-sedi 's/"Nightly"/"SQLite Writer"/'        "$ff_branding_dir/locales/en-US/brand.dtd"
-sedi 's/=Nightly/=SQLite Writer/'          "$ff_branding_dir/locales/en-US/brand.properties"
+sedi 's/"Nightly"/"Active Agenda"/'        "$ff_branding_dir/locales/en-US/brand.dtd"
+sedi 's/=Nightly/=Active Agenda/'          "$ff_branding_dir/locales/en-US/brand.properties"
 sedi 's/"Mozilla"/"Teracet"/'                "$ff_branding_dir/locales/en-US/brand.dtd"
 sedi 's/=Mozilla/=Teracet/'                  "$ff_branding_dir/locales/en-US/brand.properties"
-sedi 's/Nightly/"SQLite Writer"/'          "$ff_branding_dir/configure.sh"
-echo 'MOZ_APP_NAME="sqlite-writer-bin"' >> "$ff_branding_dir/configure.sh" # Is this only needed on Windows?
+sedi 's/Nightly/"Active Agenda"/'          "$ff_branding_dir/configure.sh"
+echo 'MOZ_APP_NAME="active-agenda-bin"' >> "$ff_branding_dir/configure.sh" # Is this only needed on Windows?
 
 if [[ "$BUILD_OS" = "mac" ]] ; then
-	#echo 'MOZ_MACBUNDLE_NAME="SQLite Writer.app"' >> "$BRANDING_DIR/configure.sh" # Doesn't work
+	#echo 'MOZ_MACBUNDLE_NAME="Active Agenda.app"' >> "$BRANDING_DIR/configure.sh" # Doesn't work
 	cp "$REPO_CONFIG_DIR/dsstore" "$ff_branding_dir/dsstore"
 	cp "$REPO_ICON_DIR/mac/background.png" "$ff_branding_dir/background.png"
 	cp "$REPO_ICON_DIR/mac/firefox.icns" "$ff_branding_dir/firefox.icns"
 fi
 
 if [[ "$BUILD_OS" = "windows" ]] ; then
-	sedi 's/"Mozilla Developer Preview"/"SQLite Writer"/' "$ff_branding_dir/branding.nsi"
+	sedi 's/"Mozilla Developer Preview"/"Active Agenda"/' "$ff_branding_dir/branding.nsi"
 	sedi 's/"mozilla.org"/"teracet.com"/'                   "$ff_branding_dir/branding.nsi"
 
 	ff_nsis_dir="$FF_SOURCE_DIR/browser/installer/windows/nsis"
-	sedi 's/Mozilla Firefox/SQLite Writer/'                  "$ff_nsis_dir/../app.tag"
-	sedi 's/FirefoxMessageWindow/SQLiteWriterMessageWindow/' "$ff_nsis_dir/defines.nsi.in"
-	sedi 's/Firefox/SQLite Writer/'                          "$ff_nsis_dir/defines.nsi.in"
+	sedi 's/Mozilla Firefox/Active Agenda/'                  "$ff_nsis_dir/../app.tag"
+	sedi 's/FirefoxMessageWindow/ActiveAgendaMessageWindow/' "$ff_nsis_dir/defines.nsi.in"
+	sedi 's/Firefox/Active Agenda/'                          "$ff_nsis_dir/defines.nsi.in"
 	sedi 's/\\Mozilla/\\Teracet/'                              "$FF_SOURCE_DIR/toolkit/mozapps/installer/windows/nsis/common.nsh"
 
 	cp "$REPO_ICON_DIR/windows/firefox.ico"            "$ff_branding_dir/firefox.ico"
@@ -63,7 +63,7 @@ fi
 
 log "Patching version"
 
-echo "MOZ_APP_VERSION='$SW_VERSION'" >> "$FF_SOURCE_DIR/browser/branding/sqlite-writer/configure.sh"
+echo "MOZ_APP_VERSION='$SW_VERSION'" >> "$FF_SOURCE_DIR/browser/branding/active-agenda/configure.sh"
 echo "$SW_VERSION" > "$FF_SOURCE_DIR/browser/config/version.txt"
 echo "$SW_VERSION" > "$FF_SOURCE_DIR/browser/config/version_display.txt"
 
@@ -73,14 +73,14 @@ log "Patching installer"
 # Ensure our additional files are included in the generated installer.
 
 package_manifest="$FF_SOURCE_DIR/browser/installer/package-manifest.in"
-echo '[sqlite-writer]'                          >> "$package_manifest"
+echo '[active-agenda]'                          >> "$package_manifest"
 if [[ "$BUILD_OS" = "linux" ]] ; then
-	echo '@BINPATH@/sqlite-writer'          >> "$package_manifest"
-	echo '@BINPATH@/sqlite-writer.desktop'  >> "$package_manifest"
+	echo '@BINPATH@/active-agenda'          >> "$package_manifest"
+	echo '@BINPATH@/active-agenda.desktop'  >> "$package_manifest"
 fi
 echo '@RESPATH@/apps/*'                           >> "$package_manifest"
 echo '@RESPATH@/mozilla.cfg'                      >> "$package_manifest"
-echo '@RESPATH@/defaults/pref/sqlite-writer.js' >> "$package_manifest"
+echo '@RESPATH@/defaults/pref/active-agenda.js' >> "$package_manifest"
 sedi '/@BINPATH@\/@MOZ_APP_NAME@-bin/d'              "$package_manifest"
 
 # Patch the duplicate file error caused by including the sqlite-manager
@@ -122,7 +122,7 @@ log "Patching build flags"
 cp "$REPO_CONFIG_DIR/mozconfig" "$FF_SOURCE_DIR/mozconfig"
 
 if [[ "$BUILD_OS" = "mac" ]] ; then
-	# 'com.teracet.sqlite writer' is not a valid bundle ID, so let's replace
+	# 'com.teracet.active agenda' is not a valid bundle ID, so let's replace
 	# the space with a dash.
 
 	src_line='MOZ_MACBUNDLE_ID=`echo.*$'
@@ -136,12 +136,12 @@ if [[ "$BUILD_OS" = "mac" ]] ; then
 	log "Patching extra bundle indentifiers"
 
 	old_id='org.mozilla.crashreporter'
-	new_id='com.teracet.sqlite-writer.crashreporter'
+	new_id='com.teracet.active-agenda.crashreporter'
 	file="$FF_SOURCE_DIR/toolkit/crashreporter/client/macbuild/Contents/Info.plist"
 	sedi "s/$old_id/$new_id/" "$file"
 
 	old_id='org.mozilla.plugincontainer'
-	new_id='com.teracet.sqlite-writer.plugincontainer'
+	new_id='com.teracet.active-agenda.plugincontainer'
 	file="$FF_SOURCE_DIR/ipc/app/macbuild/Contents/Info.plist.in"
 	sedi "s/$old_id/$new_id/" "$file"
 fi

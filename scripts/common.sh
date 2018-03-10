@@ -10,7 +10,7 @@ set -euo pipefail
 #   FF_SOURCE_DIR          Absolute path to directory where Firefox source will
 #                           be downloaded to (default: $REPO_DIR/build/source)
 #   FF_DIST_DIR            Absolute path to directory where Firefox build will
-#                           be (default: $FF_SOURCE_DIR/obj-sqlite-writer/dist)
+#                           be (default: $FF_SOURCE_DIR/obj-active-agenda/dist)
 #   FF_VERSION             Firefox version (default: 54.0.1)
 #   LLVM_CONFIG            Absolute path to llvm-config-* executable
 #                           (default: /usr/bin/llvm-config-5.0).
@@ -28,7 +28,7 @@ set -euo pipefail
 #                           sign installers on macOS (default: -)
 #   SIGNING_PASSWORD       Password for unlocking the keychain to allow code
 #                           signing. Only used on macOS (no default).
-#   SW_VERSION             SQLite Writer version (default: 0.0.0)
+#   SW_VERSION             Active Agenda version (default: 0.0.0)
 #   SM_SOURCE_DIR          (default: $REPO_DIR/sqlite-manager)
 #
 # Functions:
@@ -43,7 +43,7 @@ export REPO_DIR="${REPO_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 
 export BUILD_OS="${BUILD_OS:-`$REPO_SCRIPTS_DIR/detect-os.sh`}"
 export FF_SOURCE_DIR="${FF_SOURCE_DIR:-$REPO_DIR/build/source}"
-export FF_DIST_DIR="${FF_DIST_DIR:-$FF_SOURCE_DIR/obj-sqlite-writer/dist}"
+export FF_DIST_DIR="${FF_DIST_DIR:-$FF_SOURCE_DIR/obj-active-agenda/dist}"
 export FF_VERSION="${FF_VERSION:-58.0.2}"
 export LLVM_CONFIG="${LLVM_CONFIG:-/usr/bin/llvm-config-5.0}"
 export REPO_BUILD_DIR="${REPO_BUILD_DIR:-$REPO_DIR/build}"

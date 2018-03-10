@@ -83,8 +83,8 @@ case "$1" in
 Usage: $(basename $0) command
 Commands:
   setup         Install packages needed to build Firefox.
-  build         Download, patch, compile, and configure Firefox as SQLite
-                Writer.
+  build         Download, patch, compile, and configure Firefox as Active
+                Agenda.
   package       Package the app either as an installer (Mac/Windows) or as a
                 tarball (Linux).
 EOF
