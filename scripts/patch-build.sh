@@ -25,7 +25,7 @@ log "Removing extra binary"
 rm -f "$ff_dist_bin_dir/active-agenda-bin-bin"
 
 
-log "Installing SQLite Manager"
+log "Installing Active Agenda"
 
 # When looking for where to install extensions so that they'd be packaged with
 # the application, I found many "recommended" directories. However, I found the
