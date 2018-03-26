@@ -83,10 +83,10 @@ if [[ "$BUILD_OS" = "linux" ]] ; then
 	echo '@BINPATH@/active-agenda'          >> "$package_manifest"
 	echo '@BINPATH@/active-agenda.desktop'  >> "$package_manifest"
 fi
-echo '@RESPATH@/apps/*'                           >> "$package_manifest"
-echo '@RESPATH@/mozilla.cfg'                      >> "$package_manifest"
+echo '@RESPATH@/apps/*'                         >> "$package_manifest"
+echo '@RESPATH@/active-agenda.cfg'              >> "$package_manifest"
 echo '@RESPATH@/defaults/pref/active-agenda.js' >> "$package_manifest"
-sedi '/@BINPATH@\/@MOZ_APP_NAME@-bin/d'              "$package_manifest"
+sedi '/@BINPATH@\/@MOZ_APP_NAME@-bin/d'            "$package_manifest"
 
 # Patch the duplicate file error caused by including the sqlite-manager
 # extension in the installer.

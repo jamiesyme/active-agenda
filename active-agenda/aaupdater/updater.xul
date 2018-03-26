@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?xml-stylesheet href="chrome://global/skin/" type="text/css"?>
+
+<window id="aaUpdater" 
+	title="Active Agenda"
+	xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul"
+    onload="setTimeout('try{filesExistCheck()}catch(e){console.log(e)}', 100);"
+    persist="screenX screenY width height"
+    width="800"
+    windowtype='activeagenda'
+    height="600">
+    <!--
+    onload="startAAupdate();"
+    -->
+    <!-- -->
+	
+    
+<!---->
+<commandset>
+    <command id='refresh_cmd' oncommand='location.reload(true);' key="refresh_key"/>
+</commandset>
+
+<keyset>
+    <key id="refresh_key" modifiers="control" key="r" command="refresh_cmd"/>
+</keyset>
+
+<!-- Include Javascript -->
+<script type="application/x-javascript">
+</script>
+
+<!--<script src="io.js"/>-->
+<script src="updater.js"></script>
+
+<hbox align='center' pack='center' style='border-bottom:4px double blue;'>
+    <spacer flex='1'/>
+    <label value='Active Agenda Updater' style='font-size:34px; font-weight:bold; color:#0f1164; padding-top: 15px; padding-bottom:8px;text-shadow: 1px 1px 1px #888;'/>
+    <spacer flex='1'/>
+    <!--<image src="chrome://aaimages/content/nuvola/64x64/apps/download_manager.png"/>-->
+</hbox>
+<vbox flex='1' style='margin: 15px;'>
+    
+    <vbox id='output_console' style='background:white; margin-bottom:30px; border:2px solid darkgrey; padding:4px;' flex='1' pack='end' hidden='true'/>
+    <textbox id='console_txt' multiline='true' flex='1' readonly='true' style='-moz-appearance: none;background-color:white;'/>
+    
+    <progressmeter
+        id="download-progress"
+        height='50'
+        mode="determined"
+        value="0"/>
+        
+    <hbox style='margin-top:30px; font-size:large;'>
+        <spacer flex='1'/>
+        <button id='retry-update' label='Retry' style='' disabled='true' oncommand='startAAupdate();'/>
+        <button id='start-aa' label='Continue' style='' disabled='true' oncommand='updateSucceeded(true);'/>
+    </hbox>
+</vbox>
+		
+</window>
