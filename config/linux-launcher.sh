@@ -8,4 +8,4 @@ ICON_PATH="$APP_DIR/icons/mozicon128.png"
 sed -i -e "s|^Icon=$|Icon=$ICON_PATH|" "$ROOT_DIR/active-agenda.desktop"
 
 # Launch the app
-"$ROOT_DIR/active-agenda-bin" --app "$APP_DIR/application.ini"
+"$ROOT_DIR/active-agenda-bin" --app "$APP_DIR/application.ini" $@
