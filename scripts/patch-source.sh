@@ -30,35 +30,40 @@ cp -r "$FF_SOURCE_DIR/browser/branding/unofficial" "$ff_branding_dir"
 
 sedi 's/"Nightly"/"Active Agenda"/'        "$ff_branding_dir/locales/en-US/brand.dtd"
 sedi 's/=Nightly/=Active Agenda/'          "$ff_branding_dir/locales/en-US/brand.properties"
-sedi 's/"Mozilla"/"Teracet"/'                "$ff_branding_dir/locales/en-US/brand.dtd"
-sedi 's/=Mozilla/=Teracet/'                  "$ff_branding_dir/locales/en-US/brand.properties"
+sedi 's/"Mozilla"/"Teracet"/'              "$ff_branding_dir/locales/en-US/brand.dtd"
+sedi 's/=Mozilla/=Teracet/'                "$ff_branding_dir/locales/en-US/brand.properties"
 sedi 's/Nightly/"Active Agenda"/'          "$ff_branding_dir/configure.sh"
 echo 'MOZ_APP_NAME="active-agenda-bin"' >> "$ff_branding_dir/configure.sh" # Is this only needed on Windows?
 
-if [[ "$BUILD_OS" = "mac" ]] ; then
-	#echo 'MOZ_MACBUNDLE_NAME="Active Agenda.app"' >> "$BRANDING_DIR/configure.sh" # Doesn't work
-	cp "$REPO_CONFIG_DIR/dsstore" "$ff_branding_dir/dsstore"
-	cp "$REPO_ICON_DIR/mac/background.png" "$ff_branding_dir/background.png"
-	cp "$REPO_ICON_DIR/mac/firefox.icns" "$ff_branding_dir/firefox.icns"
-fi
+# -- Mac
+#echo 'MOZ_MACBUNDLE_NAME="Active Agenda.app"' >> "$BRANDING_DIR/configure.sh" # Doesn't work
+cp "$REPO_CONFIG_DIR/dsstore" "$ff_branding_dir/dsstore"
+cp "$REPO_ICON_DIR/mac/background.png" "$ff_branding_dir/background.png"
+cp "$REPO_ICON_DIR/mac/firefox.icns" "$ff_branding_dir/firefox.icns"
 
-if [[ "$BUILD_OS" = "windows" ]] ; then
-	sedi 's/"Mozilla Developer Preview"/"Active Agenda"/' "$ff_branding_dir/branding.nsi"
-	sedi 's/"mozilla.org"/"teracet.com"/'                   "$ff_branding_dir/branding.nsi"
+# -- Windows
+sedi 's/"Mozilla Developer Preview"/"Active Agenda"/' "$ff_branding_dir/branding.nsi"
+sedi 's/"mozilla.org"/"teracet.com"/'                 "$ff_branding_dir/branding.nsi"
 
-	ff_nsis_dir="$FF_SOURCE_DIR/browser/installer/windows/nsis"
-	sedi 's/Mozilla Firefox/Active Agenda/'                  "$ff_nsis_dir/../app.tag"
-	sedi 's/FirefoxMessageWindow/ActiveAgendaMessageWindow/' "$ff_nsis_dir/defines.nsi.in"
-	sedi 's/Firefox/Active Agenda/'                          "$ff_nsis_dir/defines.nsi.in"
-	sedi 's/\\Mozilla/\\Teracet/'                              "$FF_SOURCE_DIR/toolkit/mozapps/installer/windows/nsis/common.nsh"
+ff_nsis_dir="$FF_SOURCE_DIR/browser/installer/windows/nsis"
+sedi 's/Mozilla Firefox/Active Agenda/'                  "$ff_nsis_dir/../app.tag"
+sedi 's/FirefoxMessageWindow/ActiveAgendaMessageWindow/' "$ff_nsis_dir/defines.nsi.in"
+sedi 's/Firefox/Active Agenda/'                          "$ff_nsis_dir/defines.nsi.in"
+sedi 's/\\Mozilla/\\Teracet/'                            "$FF_SOURCE_DIR/toolkit/mozapps/installer/windows/nsis/common.nsh"
 
-	cp "$REPO_ICON_DIR/windows/firefox.ico"            "$ff_branding_dir/firefox.ico"
-	cp "$REPO_ICON_DIR/windows/VisualElements_70.png"  "$ff_branding_dir/VisualElements_70.png"
-	cp "$REPO_ICON_DIR/windows/VisualElements_150.png" "$ff_branding_dir/VisualElements_150.png"
-	cp "$REPO_ICON_DIR/windows/wizHeader.bmp"          "$ff_branding_dir/wizHeader.bmp"
-	cp "$REPO_ICON_DIR/windows/wizHeaderRTL.bmp"       "$ff_branding_dir/wizHeaderRTL.bmp"
-	cp "$REPO_ICON_DIR/windows/wizWatermark.bmp"       "$ff_branding_dir/wizWatermark.bmp"
-fi
+cp "$REPO_ICON_DIR/windows/firefox.ico"            "$ff_branding_dir/firefox.ico"
+cp "$REPO_ICON_DIR/windows/VisualElements_70.png"  "$ff_branding_dir/VisualElements_70.png"
+cp "$REPO_ICON_DIR/windows/VisualElements_150.png" "$ff_branding_dir/VisualElements_150.png"
+cp "$REPO_ICON_DIR/windows/wizHeader.bmp"          "$ff_branding_dir/wizHeader.bmp"
+cp "$REPO_ICON_DIR/windows/wizHeaderRTL.bmp"       "$ff_branding_dir/wizHeaderRTL.bmp"
+cp "$REPO_ICON_DIR/windows/wizWatermark.bmp"       "$ff_branding_dir/wizWatermark.bmp"
+
+# -- Linux
+cp "$REPO_ICON_DIR/icon_16x16.png"   "$ff_branding_dir/default16.png"
+cp "$REPO_ICON_DIR/icon_32x32.png"   "$ff_branding_dir/default32.png"
+cp "$REPO_ICON_DIR/icon_48x48.png"   "$ff_branding_dir/default48.png"
+cp "$REPO_ICON_DIR/icon_64x64.png"   "$ff_branding_dir/default64.png"
+cp "$REPO_ICON_DIR/icon_128x128.png" "$ff_branding_dir/default128.png"
 
 
 log "Patching version"
