@@ -127,6 +127,10 @@ log "Patching build flags"
 
 cp "$REPO_CONFIG_DIR/mozconfig" "$FF_SOURCE_DIR/mozconfig"
 
+log "Disabling built-in addons"
+
+sedi 's/{"system":.+}/{"system":[]}/' "$FF_SOURCE_DIR/browser/app/Makefile.in"
+
 if [[ "$BUILD_OS" = "mac" ]] ; then
 	# 'com.teracet.active agenda' is not a valid bundle ID, so let's replace
 	# the space with a dash.
