@@ -14,8 +14,8 @@ case "$BUILD_OS" in
 		# convention.
 		log "Patching package"
 		cd "$REPO_BUILD_DIR"
-		src="$FF_DIST_DIR/sqlite-writer-bin-$SW_VERSION.en-US.linux-x86_64.tar.bz2"
-		dest="sqlite-writer-${SW_VERSION}"
+		src="$FF_DIST_DIR/active-agenda-bin-$AA_VERSION.en-US.linux-x86_64.tar.bz2"
+		dest="active-agenda-${AA_VERSION}"
 		mkdir -p "$dest"
 		tar -xf "$src" --strip-components=1 -C "$dest"
 		tar -cjf "$dest.tar.bz2" "$dest"
@@ -25,12 +25,12 @@ case "$BUILD_OS" in
 	mac)
 		cd "$FF_SOURCE_DIR"
 		./mach package | tee "$REPO_BUILD_DIR/package.log"
-		cp "$FF_DIST_DIR/sqlite-writer-bin-$SW_VERSION.en-US.mac.dmg" "$REPO_BUILD_DIR/SQLite Writer $SW_VERSION.dmg"
+		cp "$FF_DIST_DIR/active-agenda-bin-$AA_VERSION.en-US.mac.dmg" "$REPO_BUILD_DIR/Active Agenda $AA_VERSION.dmg"
 
 		log "Building .pkg for app store"
 		keychain="$HOME/Library/Keychains/login.keychain-db"
-		src="$FF_DIST_DIR/sqlite-writer-bin/SQLiteWriter.app"
-		dest="$REPO_BUILD_DIR/SQLite Writer $SW_VERSION.pkg"
+		src="$FF_DIST_DIR/active-agenda-bin/ActiveAgenda.app"
+		dest="$REPO_BUILD_DIR/Active Agenda $AA_VERSION.pkg"
 		security unlock-keychain -p "$SIGNING_PASSWORD" "$keychain"
 		security set-key-partition-list -S apple-tool:,apple:,codesign: -s -k "$SIGNING_PASSWORD" "$keychain"
 		security set-keychain-settings "$keychain"
@@ -40,7 +40,7 @@ case "$BUILD_OS" in
 	windows)
 		cd "$FF_SOURCE_DIR"
 		./mach build installer | tee "$REPO_BUILD_DIR/package.log"
-		cp "$FF_DIST_DIR/install/sea/sqlite-writer-bin-$SW_VERSION.en-US.win32.installer.exe" "$REPO_BUILD_DIR/SQLite Writer Setup $SW_VERSION.exe"
+		cp "$FF_DIST_DIR/install/sea/active-agenda-bin-$AA_VERSION.en-US.win32.installer.exe" "$REPO_BUILD_DIR/Active Agenda Setup $AA_VERSION.exe"
 		;;
 
 	*)

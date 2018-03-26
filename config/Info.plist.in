@@ -9,10 +9,10 @@
 	<key>LSEnvironment</key>
 	<dict>
 		<key>XUL_APP_FILE</key>
-		<string>/Applications/SQLiteWriter.app/Contents/Resources/apps/sqlite-manager/application.ini</string>
+		<string>/Applications/ActiveAgenda.app/Contents/Resources/apps/active-agenda/application.ini</string>
 	</dict>
 	<key>CFBundleExecutable</key>
-	<string>sqlite-writer-bin</string>
+	<string>active-agenda-bin</string>
 	<key>CFBundleGetInfoString</key>
 	<string>%MAC_APP_NAME% %APP_VERSION%</string>
 	<key>CFBundleIconFile</key>

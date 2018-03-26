@@ -1,3 +1,3 @@
 # Icons
 
-This directory contains the icons and images needed to patch Firefox and the SQLite Manager extension.
+This directory contains the icons and images needed to patch Firefox and the Active Agenda extension.

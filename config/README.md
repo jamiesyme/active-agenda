@@ -11,4 +11,4 @@ This directory contains the configuration files needed to patch Firefox.
 - `make_dmg.py` is part of Firefox's packaging system that has been modified to sign the files just before packaging on Mac.
 - `mozconfig` contains Firefox build flags.
 - `mozilla.cfg` contains Firefox preferences.
-- `sqlite-writer.js` tells Firefox where to find the preferences file.
+- `active-agenda.js` tells Firefox where to find the preferences file.

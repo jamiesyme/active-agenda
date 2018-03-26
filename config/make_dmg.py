@@ -27,7 +27,7 @@ def make_dmg(source_directory, output_dmg):
     volume_name = build.substs['MOZ_APP_DISPLAYNAME']
 
     print_flush('Removing extended file attributes ...')
-    os.system('xattr -cr SQLiteWriter.app')
+    os.system('xattr -cr ActiveAgenda.app')
 
     print_flush('Unlocking keychain for signing ...')
     os.system('security unlock-keychain -p "$SIGNING_PASSWORD" "$HOME/Library/Keychains/login.keychain-db"')
@@ -35,15 +35,15 @@ def make_dmg(source_directory, output_dmg):
     os.system('security set-keychain-settings "$HOME/Library/Keychains/login.keychain-db"')
 
     need_signing = [
-        'SQLiteWriter.app/Contents/MacOS/crashreporter.app/Contents/MacOS/minidump-analyzer',
-        'SQLiteWriter.app/Contents/MacOS/crashreporter.app',
-        'SQLiteWriter.app/Contents/MacOS/plugin-container.app',
-        'SQLiteWriter.app/Contents/MacOS/*.dylib',
-        'SQLiteWriter.app/Contents/MacOS/pingsender',
-        'SQLiteWriter.app/Contents/MacOS/XUL',
-        'SQLiteWriter.app/Contents/MacOS/sqlite-writer-bin',
-        'SQLiteWriter.app/Contents/Resources/gmp-clearkey/0.1/libclearkey.dylib',
-        'SQLiteWriter.app',
+        'ActiveAgenda.app/Contents/MacOS/crashreporter.app/Contents/MacOS/minidump-analyzer',
+        'ActiveAgenda.app/Contents/MacOS/crashreporter.app',
+        'ActiveAgenda.app/Contents/MacOS/plugin-container.app',
+        'ActiveAgenda.app/Contents/MacOS/*.dylib',
+        'ActiveAgenda.app/Contents/MacOS/pingsender',
+        'ActiveAgenda.app/Contents/MacOS/XUL',
+        'ActiveAgenda.app/Contents/MacOS/active-agenda-bin',
+        'ActiveAgenda.app/Contents/Resources/gmp-clearkey/0.1/libclearkey.dylib',
+        'ActiveAgenda.app',
     ]
     for rel_path in need_signing:
         print_flush('Signing ' + rel_path + ' ...')
@@ -51,10 +51,10 @@ def make_dmg(source_directory, output_dmg):
         os.system('codesign --force --sign "$SIGNING_IDENTITY_A" --entitlements "$SIGNING_ENTITLEMENTS" --requirements "=designated => anchor apple generic" ' + abs_path)
 
     print_flush('Testing signing...')
-    os.system('codesign -vvvv ' + os.path.join(os.getcwd(), source_directory, 'SQLiteWriter.app'))
+    os.system('codesign -vvvv ' + os.path.join(os.getcwd(), source_directory, 'ActiveAgenda.app'))
 
     print_flush('Testing attributes...')
-    os.system('xattr -cr SQLiteWriter.app')
+    os.system('xattr -cr ActiveAgenda.app')
     print_flush('(done testing attributes)')
 
     dmg.create_dmg(source_directory, output_dmg, volume_name, extra_files)

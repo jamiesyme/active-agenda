@@ -1,6 +1,6 @@
 [Desktop Entry]
-Name=SQLite Writer
-Exec=bash -c "$(dirname $(readlink -f %k))/sqlite-writer"
+Name=Active Agenda
+Exec=bash -c "$(dirname $(readlink -f %k))/active-agenda"
 Icon=
 Type=Application
 Terminal=false
