@@ -28,6 +28,11 @@ rm -f "$ff_dist_bin_dir/active-agenda-bin-bin"
 
 log "Installing Active Agenda"
 
+# THE INFO BELOW IS WRONG. It has been kept for future reference. Instead of
+# storing the app in "apps/", it has been integrated with the "browser/"
+# directory, to allow for the built-in debugging tools to be used.
+#
+# Old info:
 # When looking for where to install extensions so that they'd be packaged with
 # the application, I found many "recommended" directories. However, I found the
 # information to be outdated and unreliable. So instead, changes have been made
@@ -36,16 +41,13 @@ log "Installing Active Agenda"
 # best resource I've found:
 # http://forums.mozillazine.org/viewtopic.php?p=11440295#p11440295
 
-# Copy patched source.
+aa_cp_dir="$ff_dist_res_dir/browser"
 
-aa_cp_dir="$ff_dist_res_dir/apps/active-agenda"
-mkdir -p "$aa_cp_dir"
-cp -R "$AA_SOURCE_DIR/"* "$aa_cp_dir"
+cp "$AA_SOURCE_DIR/application.ini" "$aa_cp_dir"
+cp "$AA_SOURCE_DIR/chrome.manifest" "$aa_cp_dir"
+cp -R "$AA_SOURCE_DIR/aaupdater" "$aa_cp_dir"
 
-# Patch version.
-# DISABLED
-
-#sedi "s/extVersion: \"x\.x\.x\"/extVersion: \"$AA_VERSION\"/" "$sm_cp_dir/chrome/resource/appInfo.js"
+sedi "s/^Version=.*$/Version=$AA_VERSION/" "$aa_cp_dir/application.ini"
 
 
 # Install launcher (if necessary).

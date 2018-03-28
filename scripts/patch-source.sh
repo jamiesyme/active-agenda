@@ -83,10 +83,17 @@ if [[ "$BUILD_OS" = "linux" ]] ; then
 	echo '@BINPATH@/active-agenda'          >> "$package_manifest"
 	echo '@BINPATH@/active-agenda.desktop'  >> "$package_manifest"
 fi
-echo '@RESPATH@/apps/*'                         >> "$package_manifest"
+#echo '@RESPATH@/apps/*'                         >> "$package_manifest"
 echo '@RESPATH@/active-agenda.cfg'              >> "$package_manifest"
+echo '@RESPATH@/browser/aaupdater/*'            >> "$package_manifest"
 echo '@RESPATH@/defaults/pref/active-agenda.js' >> "$package_manifest"
 sedi '/@BINPATH@\/@MOZ_APP_NAME@-bin/d'            "$package_manifest"
+
+# Patch a duplicate file error caused by mysterious chrome.manifest.
+
+allowed_dupes="$FF_SOURCE_DIR/browser/installer/allowed-dupes.mn"
+echo 'browser/chrome/chrome.manifest' >> "$allowed_dupes"
+echo 'removed-files'                  >> "$allowed_dupes"
 
 # Patch the duplicate file error caused by including the sqlite-manager
 # extension in the installer.
