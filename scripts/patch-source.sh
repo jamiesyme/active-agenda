@@ -24,6 +24,12 @@ log "Patching branding"
 ff_branding_dir="$FF_SOURCE_DIR/browser/branding/active-agenda"
 cp -r "$FF_SOURCE_DIR/browser/branding/unofficial" "$ff_branding_dir"
 
+# Use the firefox-branding.js file as our preferences file. It'd be preferable
+# to keep the file elsewhere, but I was having trouble including it in the
+# compiled omni.ja, so this will have to do.
+
+cp "$REPO_CONFIG_DIR/active-agenda.js" "$ff_branding_dir/pref/firefox-branding.js"
+
 # Update any references to "Firefox" or "Mozilla", and overwrite branding
 # images. Note that some windows installer files (.nsi) are patched in this
 # section.
@@ -52,6 +58,7 @@ sedi 's/Firefox/Active Agenda/'                          "$ff_nsis_dir/defines.n
 sedi 's/\\Mozilla/\\Teracet/'                            "$FF_SOURCE_DIR/toolkit/mozapps/installer/windows/nsis/common.nsh"
 
 cp "$REPO_ICON_DIR/windows/firefox.ico"            "$ff_branding_dir/firefox.ico"
+cp "$REPO_ICON_DIR/windows/firefox.ico"            "$ff_branding_dir/firefox64.ico"
 cp "$REPO_ICON_DIR/windows/VisualElements_70.png"  "$ff_branding_dir/VisualElements_70.png"
 cp "$REPO_ICON_DIR/windows/VisualElements_150.png" "$ff_branding_dir/VisualElements_150.png"
 cp "$REPO_ICON_DIR/windows/wizHeader.bmp"          "$ff_branding_dir/wizHeader.bmp"
@@ -62,8 +69,11 @@ cp "$REPO_ICON_DIR/windows/wizWatermark.bmp"       "$ff_branding_dir/wizWatermar
 cp "$REPO_ICON_DIR/icon_16x16.png"   "$ff_branding_dir/default16.png"
 cp "$REPO_ICON_DIR/icon_32x32.png"   "$ff_branding_dir/default32.png"
 cp "$REPO_ICON_DIR/icon_48x48.png"   "$ff_branding_dir/default48.png"
+cp "$REPO_ICON_DIR/icon_48x48.png"   "$ff_branding_dir/content/icon48.png"
 cp "$REPO_ICON_DIR/icon_64x64.png"   "$ff_branding_dir/default64.png"
+cp "$REPO_ICON_DIR/icon_64x64.png"   "$ff_branding_dir/content/icon64.png"
 cp "$REPO_ICON_DIR/icon_128x128.png" "$ff_branding_dir/default128.png"
+cp "$REPO_ICON_DIR/icon_128x128.png" "$ff_branding_dir/mozicon128.png"
 
 
 log "Patching version"
@@ -86,6 +96,7 @@ fi
 #echo '@RESPATH@/apps/*'                         >> "$package_manifest"
 echo '@RESPATH@/active-agenda.cfg'              >> "$package_manifest"
 echo '@RESPATH@/browser/aaupdater/*'            >> "$package_manifest"
+echo '@RESPATH@/browser/application.ini'        >> "$package_manifest"
 echo '@RESPATH@/defaults/pref/active-agenda.js' >> "$package_manifest"
 sedi '/@BINPATH@\/@MOZ_APP_NAME@-bin/d'            "$package_manifest"
 
@@ -136,7 +147,7 @@ cp "$REPO_CONFIG_DIR/mozconfig" "$FF_SOURCE_DIR/mozconfig"
 
 log "Disabling built-in addons"
 
-sedi 's/{"system":.+}/{"system":[]}/' "$FF_SOURCE_DIR/browser/app/Makefile.in"
+sedi -E 's/\{"system":.+\}/\{"system":\[\]\}/' "$FF_SOURCE_DIR/browser/app/Makefile.in"
 
 if [[ "$BUILD_OS" = "mac" ]] ; then
 	# 'com.teracet.active agenda' is not a valid bundle ID, so let's replace

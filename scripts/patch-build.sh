@@ -17,7 +17,6 @@ log "Configuring preferences"
 
 mkdir -p "$ff_dist_res_dir/defaults/pref"
 cp "$REPO_CONFIG_DIR/channel-prefs.js" "$ff_dist_res_dir/defaults/pref"
-cp "$REPO_CONFIG_DIR/active-agenda.js" "$ff_dist_res_dir/defaults/pref"
 cp "$REPO_CONFIG_DIR/active-agenda.cfg" "$ff_dist_res_dir"
 
 
