@@ -112,11 +112,6 @@ function startAAupdate(){
     }
     // Online and have all files, check version
     else if (_AA_VERSION_EXISTS === true && _AA_JAR_EXISTS === true && _AA_IMAGES_JAR_EXISTS == true){
-        // Read local version JSON file
-        if (!OS.File.exists(extPath + 'aa-version.json')){
-            console.log('no aa-version.json,update');
-            updateAA = true;
-        }
         let decoder = new TextDecoder();
         var p = OS.File.read(extPath + 'aa-version.json');
         p = p.then(
@@ -367,13 +362,16 @@ var xfer = {
                     updateFailed();
                 }
                 */
-                if (!OS.File.exists(extPath + dirSep + 'aa.jar'))
-                    updateFailed();
-                else {
-                    outputToUpdateConsole('Download complete : ' + aRequest.URI.spec);
-                    //document.location.reload(true);
-                    updateSucceeded();
-                }
+                OS.File.exists(extPath + 'aa.jar')
+                .then(function(exists){ 
+                    if (exists){
+                        outputToUpdateConsole('Download complete : ' + aRequest.URI.spec);
+                        //document.location.reload(true);
+                        updateSucceeded();
+                    }
+                    else
+                        updateFailed();
+                });
 			}
             if (aRequest.URI.spec == aaImagesJarURL){
                 _DOWNLOADS_ACTIVE--;
@@ -384,6 +382,19 @@ var xfer = {
                     updateFailed();
                 }
                 */
+                OS.File.exists(extPath + 'aa-images.jar')
+                .then(function(exists){ 
+                    if (exists){
+                        outputToUpdateConsole('Download complete : ' + aRequest.URI.spec);
+                        //document.location.reload(true);
+                        updateSucceeded();
+                    }
+                    else
+                        updateFailed();
+                });
+                
+                
+                /*
                 if (!OS.File.exists(extPath + dirSep + 'aa-images.jar'))
                     updateFailed();
                 else {
@@ -391,6 +402,7 @@ var xfer = {
                     //document.location.reload(true);
                     updateSucceeded();
                 }
+                */
 			}
             // Download finish, decriment DL count
 

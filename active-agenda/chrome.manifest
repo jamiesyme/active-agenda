@@ -4,6 +4,7 @@ content   aalogin     jar:aa.jar!/aa/login/
 content   aa          jar:aa.jar!/aa/aa/
 content   aaorgadmin  jar:aa.jar!/aa/orgadmin/
 content   aaorgsetup  jar:aa.jar!/aa/orgsetup/
+content   aasql       jar:aa.jar!/aa/sql/
 
 # Disable addons.
 #component {ed6e7c79-fcd3-4285-881e-f0cbb0d8ada0} components/DisabledAddonManager.js
