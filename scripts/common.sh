@@ -77,5 +77,6 @@ error_exit () {
 }
 
 sedi () {
-	sed --version >/dev/null 2>&1 && sed -i -- "$@" || sed -i "" "$@"
+	file="${@: -1}"
+	sed "$@" > "$file.tmp" && mv "$file.tmp" "$file"
 }

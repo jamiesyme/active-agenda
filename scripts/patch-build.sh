@@ -46,7 +46,7 @@ cp "$AA_SOURCE_DIR/application.ini" "$aa_cp_dir"
 cp "$AA_SOURCE_DIR/chrome.manifest" "$aa_cp_dir"
 cp -R "$AA_SOURCE_DIR/aaupdater" "$aa_cp_dir"
 
-sedi "s/^Version=.*$/Version=$AA_VERSION/" "$aa_cp_dir/application.ini"
+sedi -e "s/^Version=.*$/Version=$AA_VERSION/" "$aa_cp_dir/application.ini"
 
 
 # Install launcher (if necessary).

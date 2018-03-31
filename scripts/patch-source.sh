@@ -34,11 +34,11 @@ cp "$REPO_CONFIG_DIR/active-agenda.js" "$ff_branding_dir/pref/firefox-branding.j
 # images. Note that some windows installer files (.nsi) are patched in this
 # section.
 
-sedi 's/"Nightly"/"Active Agenda"/'        "$ff_branding_dir/locales/en-US/brand.dtd"
-sedi 's/=Nightly/=Active Agenda/'          "$ff_branding_dir/locales/en-US/brand.properties"
-sedi 's/"Mozilla"/"Teracet"/'              "$ff_branding_dir/locales/en-US/brand.dtd"
-sedi 's/=Mozilla/=Teracet/'                "$ff_branding_dir/locales/en-US/brand.properties"
-sedi 's/Nightly/"Active Agenda"/'          "$ff_branding_dir/configure.sh"
+sedi -e 's/"Nightly"/"Active Agenda"/'        "$ff_branding_dir/locales/en-US/brand.dtd"
+sedi -e 's/=Nightly/=Active Agenda/'          "$ff_branding_dir/locales/en-US/brand.properties"
+sedi -e 's/"Mozilla"/"Teracet"/'              "$ff_branding_dir/locales/en-US/brand.dtd"
+sedi -e 's/=Mozilla/=Teracet/'                "$ff_branding_dir/locales/en-US/brand.properties"
+sedi -e 's/Nightly/"Active Agenda"/'          "$ff_branding_dir/configure.sh"
 echo 'MOZ_APP_NAME="active-agenda-bin"' >> "$ff_branding_dir/configure.sh" # Is this only needed on Windows?
 
 # -- Mac
@@ -48,14 +48,14 @@ cp "$REPO_ICON_DIR/mac/background.png" "$ff_branding_dir/background.png"
 cp "$REPO_ICON_DIR/mac/firefox.icns" "$ff_branding_dir/firefox.icns"
 
 # -- Windows
-sedi 's/"Mozilla Developer Preview"/"Active Agenda"/' "$ff_branding_dir/branding.nsi"
-sedi 's/"mozilla.org"/"teracet.com"/'                 "$ff_branding_dir/branding.nsi"
+sedi -e 's/"Mozilla Developer Preview"/"Active Agenda"/' "$ff_branding_dir/branding.nsi"
+sedi -e 's/"mozilla.org"/"teracet.com"/'                 "$ff_branding_dir/branding.nsi"
 
 ff_nsis_dir="$FF_SOURCE_DIR/browser/installer/windows/nsis"
-sedi 's/Mozilla Firefox/Active Agenda/'                  "$ff_nsis_dir/../app.tag"
-sedi 's/FirefoxMessageWindow/ActiveAgendaMessageWindow/' "$ff_nsis_dir/defines.nsi.in"
-sedi 's/Firefox/Active Agenda/'                          "$ff_nsis_dir/defines.nsi.in"
-sedi 's/\\Mozilla/\\Teracet/'                            "$FF_SOURCE_DIR/toolkit/mozapps/installer/windows/nsis/common.nsh"
+sedi -e 's/Mozilla Firefox/Active Agenda/'                  "$ff_nsis_dir/../app.tag"
+sedi -e 's/FirefoxMessageWindow/ActiveAgendaMessageWindow/' "$ff_nsis_dir/defines.nsi.in"
+sedi -e 's/Firefox/Active Agenda/'                          "$ff_nsis_dir/defines.nsi.in"
+sedi -e 's/\\Mozilla/\\Teracet/'                            "$FF_SOURCE_DIR/toolkit/mozapps/installer/windows/nsis/common.nsh"
 
 cp "$REPO_ICON_DIR/windows/firefox.ico"            "$ff_branding_dir/firefox.ico"
 cp "$REPO_ICON_DIR/windows/firefox.ico"            "$ff_branding_dir/firefox64.ico"
@@ -97,8 +97,8 @@ fi
 echo '@RESPATH@/active-agenda.cfg'              >> "$package_manifest"
 echo '@RESPATH@/browser/aaupdater/*'            >> "$package_manifest"
 echo '@RESPATH@/browser/application.ini'        >> "$package_manifest"
-echo '@RESPATH@/defaults/pref/active-agenda.js' >> "$package_manifest"
-sedi '/@BINPATH@\/@MOZ_APP_NAME@-bin/d'            "$package_manifest"
+#echo '@RESPATH@/defaults/pref/active-agenda.js' >> "$package_manifest"
+sedi -e '/@BINPATH@\/@MOZ_APP_NAME@-bin/d'         "$package_manifest"
 
 # Patch a duplicate file error caused by mysterious chrome.manifest.
 
@@ -147,7 +147,7 @@ cp "$REPO_CONFIG_DIR/mozconfig" "$FF_SOURCE_DIR/mozconfig"
 
 log "Disabling built-in addons"
 
-sedi -E 's/\{"system":.+\}/\{"system":\[\]\}/' "$FF_SOURCE_DIR/browser/app/Makefile.in"
+sedi -Ee 's/\{"system":.+\}/\{"system":\[\]\}/' "$FF_SOURCE_DIR/browser/app/Makefile.in"
 
 if [[ "$BUILD_OS" = "mac" ]] ; then
 	# 'com.teracet.active agenda' is not a valid bundle ID, so let's replace
@@ -156,7 +156,7 @@ if [[ "$BUILD_OS" = "mac" ]] ; then
 	src_line='MOZ_MACBUNDLE_ID=`echo.*$'
 	new_transform="tr '[A-Z]' '[a-z]' | tr ' ' '-'"
 	new_line='MOZ_MACBUNDLE_ID=`echo $MOZ_APP_DISPLAYNAME | '$new_transform'`'
-	sedi "s/$src_line/$new_line/" "$FF_SOURCE_DIR/old-configure.in"
+	sedi -e "s/$src_line/$new_line/" "$FF_SOURCE_DIR/old-configure.in"
 fi
 
 
@@ -166,12 +166,12 @@ if [[ "$BUILD_OS" = "mac" ]] ; then
 	old_id='org.mozilla.crashreporter'
 	new_id='com.teracet.active-agenda.crashreporter'
 	file="$FF_SOURCE_DIR/toolkit/crashreporter/client/macbuild/Contents/Info.plist"
-	sedi "s/$old_id/$new_id/" "$file"
+	sedi -e "s/$old_id/$new_id/" "$file"
 
 	old_id='org.mozilla.plugincontainer'
 	new_id='com.teracet.active-agenda.plugincontainer'
 	file="$FF_SOURCE_DIR/ipc/app/macbuild/Contents/Info.plist.in"
-	sedi "s/$old_id/$new_id/" "$file"
+	sedi -e "s/$old_id/$new_id/" "$file"
 fi
 
 if [[ "$BUILD_OS" = "mac" ]] ; then
@@ -180,17 +180,17 @@ if [[ "$BUILD_OS" = "mac" ]] ; then
 	# Disable CGSSetDebugOptions
 	line='^\(.*CGSSetDebugOptions.*\)$'
 	file="$FF_SOURCE_DIR/dom/plugins/ipc/PluginProcessChild.cpp"
-	sedi "s/$line/\/\/\1/" "$file"
+	sedi -e "s/$line/\/\/\1/" "$file"
 	file="$FF_SOURCE_DIR/widget/cocoa/nsAppShell.mm"
-	sedi "s/$line/\/\/\1/" "$file"
+	sedi -e "s/$line/\/\/\1/" "$file"
 
 	# Disable CGSSetWindowBackgroundBlurRadius
 	line='^\(.*CGSSetWindowBackgroundBlurRadius.*\)$'
 	file="$FF_SOURCE_DIR/widget/cocoa/nsCocoaWindow.mm"
-	sedi "s/$line/\/\/\1/" "$file"
+	sedi -e "s/$line/\/\/\1/" "$file"
 
 	# Disable NSTextInputReplacementRangeAttributeName
 	line='^\(.*NSTextInputReplacementRangeAttributeName.*\)$'
 	file="$FF_SOURCE_DIR/widget/cocoa/TextInputHandler.mm"
-	sedi "s/$line/\/\/\1/" "$file"
+	sedi -e "s/$line/\/\/\1/" "$file"
 fi
