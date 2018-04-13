@@ -17,6 +17,7 @@ log "Configuring preferences"
 
 mkdir -p "$ff_dist_res_dir/defaults/pref"
 cp "$REPO_CONFIG_DIR/channel-prefs.js" "$ff_dist_res_dir/defaults/pref"
+cp "$REPO_CONFIG_DIR/active-agenda.js" "$ff_dist_res_dir/defaults/pref"
 cp "$REPO_CONFIG_DIR/active-agenda.cfg" "$ff_dist_res_dir"
 
 
@@ -43,7 +44,7 @@ log "Installing Active Agenda"
 aa_cp_dir="$ff_dist_res_dir/browser"
 
 cp "$AA_SOURCE_DIR/application.ini" "$aa_cp_dir"
-cp "$AA_SOURCE_DIR/chrome.manifest" "$aa_cp_dir"
+#cp "$AA_SOURCE_DIR/chrome.manifest" "$aa_cp_dir"
 cp -R "$AA_SOURCE_DIR/aaupdater" "$aa_cp_dir"
 
 sedi -e "s/^Version=.*$/Version=$AA_VERSION/" "$aa_cp_dir/application.ini"
