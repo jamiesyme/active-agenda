@@ -24,21 +24,15 @@ log "Patching branding"
 ff_branding_dir="$FF_SOURCE_DIR/browser/branding/active-agenda"
 cp -r "$FF_SOURCE_DIR/browser/branding/unofficial" "$ff_branding_dir"
 
-# Use the firefox-branding.js file as our preferences file. It'd be preferable
-# to keep the file elsewhere, but I was having trouble including it in the
-# compiled omni.ja, so this will have to do.
-
-cp "$REPO_CONFIG_DIR/active-agenda.js" "$ff_branding_dir/pref/firefox-branding.js"
-
 # Update any references to "Firefox" or "Mozilla", and overwrite branding
 # images. Note that some windows installer files (.nsi) are patched in this
 # section.
 
-sedi -e 's/"Nightly"/"Active Agenda"/'        "$ff_branding_dir/locales/en-US/brand.dtd"
-sedi -e 's/=Nightly/=Active Agenda/'          "$ff_branding_dir/locales/en-US/brand.properties"
-sedi -e 's/"Mozilla"/"Teracet"/'              "$ff_branding_dir/locales/en-US/brand.dtd"
-sedi -e 's/=Mozilla/=Teracet/'                "$ff_branding_dir/locales/en-US/brand.properties"
-sedi -e 's/Nightly/"Active Agenda"/'          "$ff_branding_dir/configure.sh"
+sedi -e 's/"Nightly"/"Active Agenda"/'     "$ff_branding_dir/locales/en-US/brand.dtd"
+sedi -e 's/=Nightly/=Active Agenda/'       "$ff_branding_dir/locales/en-US/brand.properties"
+sedi -e 's/"Mozilla"/"Teracet"/'           "$ff_branding_dir/locales/en-US/brand.dtd"
+sedi -e 's/=Mozilla/=Teracet/'             "$ff_branding_dir/locales/en-US/brand.properties"
+sedi -e 's/Nightly/"Active Agenda"/'       "$ff_branding_dir/configure.sh"
 echo 'MOZ_APP_NAME="active-agenda-bin"' >> "$ff_branding_dir/configure.sh" # Is this only needed on Windows?
 
 # -- Mac
@@ -93,18 +87,16 @@ if [[ "$BUILD_OS" = "linux" ]] ; then
 	echo '@BINPATH@/active-agenda'          >> "$package_manifest"
 	echo '@BINPATH@/active-agenda.desktop'  >> "$package_manifest"
 fi
-#echo '@RESPATH@/apps/*'                         >> "$package_manifest"
-echo '@RESPATH@/active-agenda.cfg'              >> "$package_manifest"
-echo '@RESPATH@/browser/aaupdater/*'            >> "$package_manifest"
-echo '@RESPATH@/browser/application.ini'        >> "$package_manifest"
-#echo '@RESPATH@/defaults/pref/active-agenda.js' >> "$package_manifest"
 sedi -e '/@BINPATH@\/@MOZ_APP_NAME@-bin/d'         "$package_manifest"
 
-# Patch a duplicate file error caused by mysterious chrome.manifest.
+# Some files have to be inserted JUST before packaging, so we need to add a hook
+# to allow for that.
 
-allowed_dupes="$FF_SOURCE_DIR/browser/installer/allowed-dupes.mn"
-echo 'browser/chrome/chrome.manifest' >> "$allowed_dupes"
-echo 'removed-files'                  >> "$allowed_dupes"
+package_mk_path="$FF_SOURCE_DIR/toolkit/mozapps/installer/packager.mk"
+script_path="$REPO_SCRIPTS_DIR/patch-staged-package.sh"
+old_cmd="\\\$(MAKE_PACKAGE)"
+new_cmd="$script_path '\\\$(MOZ_PKG_DIR)' \\&\\& \\\$(MAKE_PACKAGE)"
+sedi -e "s|$old_cmd|$new_cmd|" "$package_mk_path"
 
 # Patch the duplicate file error caused by including the sqlite-manager
 # extension in the installer.
