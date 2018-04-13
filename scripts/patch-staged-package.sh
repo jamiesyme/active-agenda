@@ -3,7 +3,7 @@ set -euo pipefail
 
 # Expects rel path to staging dir to be passed as the first and only parameter.
 # This path is relative to the DIST dir, and is typically 'active-agenda-bin',
-# but is determined by the moz build system.
+# but is ultimately determined by the moz build system.
 
 
 REPO_SCRIPTS_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -20,5 +20,5 @@ fi
 
 log "Patching staged package"
 
-aa_cp_dir="$ff_dist_res_dir/browser"
-cp "$AA_SOURCE_DIR/chrome.manifest" "$aa_cp_dir"
+cp -R "$AA_SOURCE_DIR/." "$ff_dist_res_dir"
+sedi -e "s/^Version=.*$/Version=$AA_VERSION/" "$ff_dist_res_dir/browser/application.ini"
