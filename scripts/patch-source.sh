@@ -94,9 +94,15 @@ sedi -e '/@BINPATH@\/@MOZ_APP_NAME@-bin/d'         "$package_manifest"
 
 package_mk_path="$FF_SOURCE_DIR/toolkit/mozapps/installer/packager.mk"
 script_path="$REPO_SCRIPTS_DIR/patch-staged-package.sh"
-old_cmd="\\\$(MAKE_PACKAGE)"
-new_cmd="$script_path '\\\$(MOZ_PKG_DIR)' \\&\\& \\\$(MAKE_PACKAGE)"
-sedi -e "s|$old_cmd|$new_cmd|" "$package_mk_path"
+if [[ "$BUILD_OS" = "windows" ]] ; then
+	old_cmd="\\\$(DIST)/\\\$(MOZ_PKG_DIR)\\\$(_BINPATH)/\\. \\\$(DEPTH)/installer-stage/core"
+	new_cmd="\\\$(DIST)/\\\$(MOZ_PKG_DIR)\\\$(_BINPATH)/\\. \\\$(DEPTH)/installer-stage/core \\&\\& $script_path '../installer-stage/core'"
+	sedi -e "s|$old_cmd|$new_cmd|" "$package_mk_path"
+else
+	old_cmd="\\\$(MAKE_PACKAGE)"
+	new_cmd="$script_path '\\\$(MOZ_PKG_DIR)' \\&\\& \\\$(MAKE_PACKAGE)"
+	sedi -e "s|$old_cmd|$new_cmd|" "$package_mk_path"
+fi
 
 # Patch the duplicate file error caused by including the sqlite-manager
 # extension in the installer.
