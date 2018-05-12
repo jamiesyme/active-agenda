@@ -23,7 +23,7 @@ $download_cmd "$file" "$download_url"
 
 log "Unpacking Firefox source"
 if [[ "$BUILD_OS" = "windows" ]] ; then
-	tar -xf "$file" --directory "$FF_SOURCE_DIR" --strip-components=1 --exclude="testing/mozharness/configs/single_locale/linux32_devedition.py"
+	tar -xf "$file" --directory "$FF_SOURCE_DIR" --strip-components=1 --exclude="testing/mozharness/configs/single_locale/linux32_devedition.py" --exclude="testing/mozharness/configs/single_locale/linux32.py"
 else
 	tar -xf "$file" --directory "$FF_SOURCE_DIR" --strip-components=1
 fi

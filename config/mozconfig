@@ -8,6 +8,9 @@ MOZ_REQUIRE_SIGNING=0
 # Specify the distribution id for mac builds
 MOZ_DISTRIBUTION_ID="com.teracet"
 
+# Disable "warnings as errors" for rust compiler (causes compilation to fail)
+RUSTFLAGS="--cap-lints warn"
+
 # Ignore previous builds
 mk_add_options AUTOCLOBBER=1
 
